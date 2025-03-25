@@ -3,20 +3,24 @@ package main
 import "fmt"
 
 func main() {
-	var revenue float64
-	var expenses float64
-	var taxRate float64
+	// var revenue float64
+	// var expenses float64
+	// var taxRate float64
 
-	outputText("Revenue: ")
-	fmt.Scan(&revenue)
+	revenue := readUserInput("Revenue: ")
+	expenses := readUserInput("Expense: ")
+	taxRate := readUserInput("Tax Rate: ")
 
-	outputText("Expenses: ")
-	fmt.Scan(&expenses)
+	// outputText("Revenue: ")
+	// fmt.Scan(&revenue)
 
-	outputText("Tax Rate: ")
-	fmt.Scan(&taxRate)
+	// outputText("Expenses: ")
+	// fmt.Scan(&expenses)
 
-	ebt, profit, ratio := calculateEbtProfitAndRatioAlt(revenue, expenses, taxRate)
+	// outputText("Tax Rate: ")
+	// fmt.Scan(&taxRate)
+
+	ebt, profit, ratio := calculateFinancialsAlt(revenue, expenses, taxRate)
 
 	// ebt := revenue - expenses
 	// profit := ebt * (1 - taxRate/100)
@@ -36,7 +40,7 @@ func outputText(text string) {
 	fmt.Print(text)
 }
 
-func calculateEbtProfitAndRatio(revenue, expenses, taxRate float64) (float64, float64, float64) {
+func calculateFinancials(revenue, expenses, taxRate float64) (float64, float64, float64) {
 	ebt := revenue - expenses
 	profit := ebt * (1 - taxRate/100)
 	ratio := ebt / profit
@@ -44,10 +48,17 @@ func calculateEbtProfitAndRatio(revenue, expenses, taxRate float64) (float64, fl
 }
 
 /*Alternative return snyntax for function*/
-func calculateEbtProfitAndRatioAlt(revenue, expenses, taxRate float64) (ebt, profit, ratio float64) {
+func calculateFinancialsAlt(revenue, expenses, taxRate float64) (ebt, profit, ratio float64) {
 	ebt = revenue - expenses
 	profit = ebt * (1 - taxRate/100)
 	ratio = ebt / profit
 	//return ebt, profit, ratio (or)
 	return
+}
+
+func readUserInput(infoText string) float64 {
+	var userInput float64
+	fmt.Print(infoText)
+	fmt.Scan(&userInput)
+	return userInput
 }
