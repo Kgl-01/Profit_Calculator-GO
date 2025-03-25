@@ -7,13 +7,13 @@ func main() {
 	var expenses float64
 	var taxRate float64
 
-	fmt.Print("Revenue: ")
+	outputText("Revenue: ")
 	fmt.Scan(&revenue)
 
-	fmt.Print("Expenses: ")
+	outputText("Expenses: ")
 	fmt.Scan(&expenses)
 
-	fmt.Print("Tax Rate: ")
+	outputText("Tax Rate: ")
 	fmt.Scan(&taxRate)
 
 	ebt := revenue - expenses
@@ -24,7 +24,12 @@ func main() {
 	formattedProfit := fmt.Sprintf("Your profit is: %.2f \n", profit)
 	formattedRatio := fmt.Sprintf("EBT / Profit: %.2f \n", ratio)
 
+	//Single line string formatted values
 	fmt.Print(formattedEbt)
 	fmt.Print(formattedProfit)
 	fmt.Print(formattedRatio)
+}
+
+func outputText(text string) {
+	fmt.Print(text)
 }
