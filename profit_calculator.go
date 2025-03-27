@@ -1,25 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
-	// var revenue float64
-	// var expenses float64
-	// var taxRate float64
 
-	revenue := readUserInput("Revenue: ")
-	expenses := readUserInput("Expense: ")
-	taxRate := readUserInput("Tax Rate: ")
+	revenue, err1 := readUserInput("Revenue: ")
+	if err1 != nil {
+		fmt.Println(err1)
+		return
+	}
 
-	// outputText("Revenue: ")
-	// fmt.Scan(&revenue)
+	expenses, err2 := readUserInput("Expense: ")
+	if err2 != nil {
+		fmt.Println(err2)
+		return
+	}
 
-	// outputText("Expenses: ")
-	// fmt.Scan(&expenses)
-
-	// outputText("Tax Rate: ")
-	// fmt.Scan(&taxRate)
-
+	taxRate, err3 := readUserInput("Tax Rate: ")
+	if err3 != nil {
+		fmt.Println(err3)
+		return
+	}
 	ebt, profit, ratio := calculateFinancialsAlt(revenue, expenses, taxRate)
 
 	// ebt := revenue - expenses
@@ -56,9 +60,12 @@ func calculateFinancialsAlt(revenue, expenses, taxRate float64) (ebt, profit, ra
 	return
 }
 
-func readUserInput(infoText string) float64 {
+func readUserInput(infoText string) (float64, error) {
 	var userInput float64
 	fmt.Print(infoText)
 	fmt.Scan(&userInput)
-	return userInput
+	if userInput <= 0 {
+		return 0, errors.New("Value must be a positive number")
+	}
+	return userInput, nil
 }
