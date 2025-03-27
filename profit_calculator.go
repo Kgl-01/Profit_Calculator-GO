@@ -8,22 +8,16 @@ import (
 func main() {
 
 	revenue, err1 := readUserInput("Revenue: ")
-	if err1 != nil {
+
+	expenses, err2 := readUserInput("Expense: ")
+
+	taxRate, err3 := readUserInput("Tax Rate: ")
+
+	if err1 != nil || err2 != nil || err3 != nil {
 		fmt.Println(err1)
 		return
 	}
 
-	expenses, err2 := readUserInput("Expense: ")
-	if err2 != nil {
-		fmt.Println(err2)
-		return
-	}
-
-	taxRate, err3 := readUserInput("Tax Rate: ")
-	if err3 != nil {
-		fmt.Println(err3)
-		return
-	}
 	ebt, profit, ratio := calculateFinancialsAlt(revenue, expenses, taxRate)
 
 	// ebt := revenue - expenses
