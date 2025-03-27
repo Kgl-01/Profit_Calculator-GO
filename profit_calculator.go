@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -32,6 +33,7 @@ func main() {
 	fmt.Print(formattedEbt)
 	fmt.Print(formattedProfit)
 	fmt.Print(formattedRatio)
+	storeResults(ebt, profit, ratio)
 }
 
 func outputText(text string) {
@@ -62,4 +64,9 @@ func readUserInput(infoText string) (float64, error) {
 		return 0, errors.New("Value must be a positive number")
 	}
 	return userInput, nil
+}
+
+func storeResults(ebt, profit, ratio float64) {
+	results := fmt.Sprintf("EBT: %.1f\nProfit: %.1f\nRatio: %.3f\n", ebt, profit, ratio)
+	os.WriteFile("results.txt", []byte(results), 0644)
 }
